@@ -1,12 +1,12 @@
 package cinema.dao.impl;
 
-import cinema.model.Order;
-import cinema.util.HibernateUtil;
-import java.util.List;
 import cinema.dao.OrderDao;
 import cinema.exception.DataProcessingException;
 import cinema.lib.Dao;
+import cinema.model.Order;
 import cinema.model.User;
+import cinema.util.HibernateUtil;
+import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -39,7 +39,8 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<Order> getByUser(User user) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<Order> getOrdersByUser = session.createQuery("from Order o "
+            Query<Order> getOrdersByUser = session.createQuery("select distinct o "
+                    + "from Order o "
                     + "join fetch o.user "
                     + "join fetch o.tickets t "
                     + "join fetch t.movieSession mv "

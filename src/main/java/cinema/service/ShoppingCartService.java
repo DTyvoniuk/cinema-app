@@ -1,7 +1,7 @@
 package cinema.service;
 
-import cinema.model.ShoppingCart;
 import cinema.model.MovieSession;
+import cinema.model.ShoppingCart;
 import cinema.model.User;
 
 public interface ShoppingCartService {

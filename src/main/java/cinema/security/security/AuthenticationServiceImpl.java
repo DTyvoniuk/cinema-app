@@ -2,12 +2,12 @@ package cinema.security.security;
 
 import cinema.exception.AuthenticationException;
 import cinema.lib.Inject;
-import cinema.service.ShoppingCartService;
-import cinema.util.HashUtil;
-import java.util.Optional;
 import cinema.lib.Service;
 import cinema.model.User;
+import cinema.service.ShoppingCartService;
 import cinema.service.UserService;
+import cinema.util.HashUtil;
+import java.util.Optional;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -36,7 +36,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     private boolean matchPasswords(String rawPassword, User userFromDb) {
-        String hashedPassword = HashUtil.hashPassword(rawPassword, userFromDb.getSalt());
+        String hashedPassword = HashUtil.hashedPassword(rawPassword, userFromDb.getSalt());
         return hashedPassword.equals(userFromDb.getPassword());
     }
 }
