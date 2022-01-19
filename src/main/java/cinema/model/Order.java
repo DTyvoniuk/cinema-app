@@ -11,32 +11,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany
-    @JoinTable(name = "order_tickets",
-            joinColumns = @JoinColumn(name = "orders_id"),
+    @JoinTable(name = "orders_tickets",
+            joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "ticket_id"))
     private List<Ticket> tickets;
-    @Column(name = "order_date")
-    private LocalDateTime localDateTime;
+    @Column(name = "order_time")
+    private LocalDateTime orderTime;
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
-
-    public Order(){
-    }
-
-    public Order(List<Ticket> tickets, LocalDateTime localDateTime, User user) {
-        this.tickets = tickets;
-        this.localDateTime = localDateTime;
-        this.user = user;
-    }
 
     public Long getId() {
         return id;
@@ -54,12 +44,12 @@ public class Order {
         this.tickets = tickets;
     }
 
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+    public LocalDateTime getOrderTime() {
+        return orderTime;
     }
 
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
+    public void setOrderTime(LocalDateTime orderTime) {
+        this.orderTime = orderTime;
     }
 
     public User getUser() {
@@ -75,8 +65,7 @@ public class Order {
         return "Order{"
                 + "id=" + id
                 + ", tickets=" + tickets
-                + ", localDateTime=" + localDateTime
-                + ", user=" + user
-                + '}';
+                + ", orderTime=" + orderTime
+                + ", user=" + user + '}';
     }
 }
